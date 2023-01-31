@@ -30,4 +30,4 @@ const updateStatusSchema = Joi.object({
    }),
  })
 
-module.exports = { addContactSchema, updateContactSchema, updateStatusSchema };
+module.exports = { addContactSchema, updateContactSchema, updateStatusSchema }; 

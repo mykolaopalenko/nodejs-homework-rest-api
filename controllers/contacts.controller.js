@@ -4,7 +4,8 @@ const { Contact } = require("../models/contacts")
 
 
 async function getContacts(req, res) {
-   const contacts = await Contact.find({});
+   const { _id: owner} = req.user
+   const contacts = await Contact.find({owner});
    res.json(contacts)
 }
 
@@ -19,7 +20,8 @@ async function getContact(req, res, next) {
 
 async function createContact(req, res) {
    const contact = req.body
-   const newContact = await Contact.create(contact)
+   const { _id: owner } = req.user
+   const newContact = await Contact.create({ ...contact, owner })
    return res.status(201).json(newContact)
 }
 
