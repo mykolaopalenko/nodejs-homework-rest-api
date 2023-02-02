@@ -21,6 +21,10 @@ const userSchema = new Schema({
       enum: ["starter", "pro", "business"],
       default: "starter"
    },
+   avatarURL: {
+      type: String,
+      required: true,
+   },
    token: String
 }, { versionKey: false })
 
@@ -28,21 +32,21 @@ userSchema.post("save", handleSaveErrors);
 
 const registerAndLoginSchema = Joi.object({
    password: Joi.string().min(6).required().messages({
-     "any.required": `Set password for user`,
+      "any.required": `Set password for user`,
    }),
    email: Joi.string().pattern(emailRegexp).required().messages({
-     "any.required": `Email is required`,
+      "any.required": `Email is required`,
    }),
- });
+});
 
 
- const schemas = {
+const schemas = {
    registerAndLoginSchema
- }
+}
 
- const User = model("user", userSchema)
+const User = model("user", userSchema)
 
- module.exports = {
+module.exports = {
    User,
    schemas,
- }
+}
