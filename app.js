@@ -21,7 +21,7 @@ app.use('/api/contacts', contactsRouter)
 app.use((req, res) => {
    res.status(404).json({ message: 'Not found' })
 })
- 
+
 app.use((err, req, res, next) => {
    if (err.status) {
       return res.status(err.status).json({
@@ -31,12 +31,11 @@ app.use((err, req, res, next) => {
 
    if (err.message.includes("Cast to ObjectId failed for value")) {
       return res.status(400).json({
-        message: "id is invalid",
+         message: "id is invalid",
       });
-    }
+   }
 
-  return res.status(500).json({ message: err.message })
+   return res.status(500).json({ message: err.message })
 })
-
 
 module.exports = { app }
